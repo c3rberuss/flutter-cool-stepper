@@ -49,17 +49,21 @@ class CoolStepperConfig {
   /// default is 'FINISH'
   final String finalText;
 
-  const CoolStepperConfig(
-      {this.backText,
-      this.nextText,
-      this.stepText,
-      this.ofText,
-      this.headerColor,
-      this.iconColor,
-      this.icon,
-      this.titleTextStyle,
-      this.subtitleTextStyle,
-      this.progLabels,
-      this.finalText,
-      this.stepperTextStyle});
+  final EdgeInsetsGeometry buttonsPadding;
+
+  const CoolStepperConfig({
+    this.backText = "PREV",
+    this.nextText = "NEXT",
+    this.stepText = "STEP",
+    this.ofText = "OF",
+    this.headerColor,
+    this.iconColor,
+    this.icon,
+    this.titleTextStyle,
+    this.subtitleTextStyle,
+    this.progLabels,
+    this.finalText = "FINISH",
+    this.stepperTextStyle,
+    this.buttonsPadding = const EdgeInsets.symmetric(horizontal: 4),
+  });
 }

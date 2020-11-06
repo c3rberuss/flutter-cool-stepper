@@ -14,21 +14,28 @@ class CoolStepper extends StatefulWidget {
   final VoidCallback onCompleted;
   final EdgeInsetsGeometry contentPadding;
   final CoolStepperConfig config;
+  final Widget Function(Function, String) nextButton;
+  final Widget Function(Function, String) backButton;
+  final Widget Function(Function, String) finishButton;
 
-  const CoolStepper({
-    Key key,
-    @required this.steps,
-    @required this.onCompleted,
-    this.contentPadding = const EdgeInsets.symmetric(horizontal: 20.0),
-    this.config = const CoolStepperConfig(
-      backText: "PREV",
-      nextText: "NEXT",
-      stepText: "STEP",
-      ofText: "OF",
-      finalText: "FINISH",
-      progLabels: null,
-    ),
-  }) : super(key: key);
+  const CoolStepper(
+      {Key key,
+      @required this.steps,
+      @required this.onCompleted,
+      this.contentPadding = const EdgeInsets.symmetric(horizontal: 20.0),
+      this.config = const CoolStepperConfig(
+        backText: "PREV",
+        nextText: "NEXT",
+        stepText: "STEP",
+        ofText: "OF",
+        finalText: "FINISH",
+        progLabels: null,
+        buttonsPadding: EdgeInsets.symmetric(horizontal: 4),
+      ),
+      this.backButton,
+      this.nextButton,
+      this.finishButton})
+      : super(key: key);
 
   @override
   _CoolStepperState createState() => _CoolStepperState();
@@ -144,26 +151,49 @@ class _CoolStepperState extends State<CoolStepper> {
     }
 
     final buttons = Container(
+      padding: widget.config.buttonsPadding,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          FlatButton(
-            onPressed: onStepBack,
-            child: Text(
-              getPrevLabel(),
-              style: TextStyle(color: Colors.grey),
-            ),
-          ),
+          if (_isFirst(currentStep)) ...[
+            FlatButton(onPressed: null, child: null)
+          ] else ...[
+            widget.backButton == null
+                ? FlatButton(
+                    onPressed: onStepBack,
+                    child: Text(
+                      getPrevLabel(),
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                  )
+                : widget.backButton(onStepBack, getPrevLabel())
+          ],
           counter,
-          FlatButton(
-            onPressed: onStepNext,
-            child: Text(
-              getNextLabel(),
-              style: TextStyle(
-                color: Colors.green,
-              ),
-            ),
-          ),
+          if (_isLast(currentStep)) ...[
+            widget.finishButton == null
+                ? FlatButton(
+                    onPressed: onStepNext,
+                    child: Text(
+                      widget.config.finalText,
+                      style: TextStyle(
+                        color: Colors.green,
+                      ),
+                    ),
+                  )
+                : widget.finishButton(onStepNext, widget.config.finalText),
+          ] else ...[
+            widget.nextButton == null
+                ? FlatButton(
+                    onPressed: onStepNext,
+                    child: Text(
+                      getNextLabel(),
+                      style: TextStyle(
+                        color: Colors.green,
+                      ),
+                    ),
+                  )
+                : widget.nextButton(onStepNext, getNextLabel()),
+          ],
         ],
       ),
     );

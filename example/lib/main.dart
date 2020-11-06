@@ -110,6 +110,27 @@ class _MyHomePageState extends State<MyHomePage> {
       config: CoolStepperConfig(
         backText: "PREV",
       ),
+      nextButton: (function, text) {
+        return MaterialButton(
+          onPressed: function,
+          child: Text(text),
+          color: Colors.amber,
+        );
+      },
+      backButton: (function, text) {
+        return MaterialButton(
+          onPressed: function,
+          child: Text(text),
+          color: Colors.cyanAccent,
+        );
+      },
+      finishButton: (function, text) {
+        return MaterialButton(
+          onPressed: function,
+          child: Text(text),
+          color: Colors.redAccent,
+        );
+      },
     );
 
     return Scaffold(
