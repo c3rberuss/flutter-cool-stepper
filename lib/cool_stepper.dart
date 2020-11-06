@@ -1,12 +1,12 @@
 library cool_stepper;
 
-export 'package:cool_stepper/src/models/cool_step.dart';
-export 'package:cool_stepper/src/models/cool_stepper_config.dart';
-
 import 'package:cool_stepper/src/models/cool_step.dart';
 import 'package:cool_stepper/src/models/cool_stepper_config.dart';
 import 'package:cool_stepper/src/widgets/cool_stepper_view.dart';
 import 'package:flutter/material.dart';
+
+export 'package:cool_stepper/src/models/cool_step.dart';
+export 'package:cool_stepper/src/models/cool_stepper_config.dart';
 
 /// CoolStepper
 class CoolStepper extends StatefulWidget {
@@ -107,9 +107,10 @@ class _CoolStepperState extends State<CoolStepper> {
     final counter = Container(
       child: Text(
         "${widget.config.stepText ?? 'STEP'} ${currentStep + 1} ${widget.config.ofText ?? 'OF'} ${widget.steps.length}",
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
+        style: widget.config.stepperTextStyle ??
+            TextStyle(
+              fontWeight: FontWeight.bold,
+            ),
       ),
     );
 
