@@ -136,18 +136,18 @@ class _CoolStepperState extends State<CoolStepper> {
     }
 
     String getPrevLabel() {
-      String backLabel;
-      if (widget.config.progLabels != null) {
-        if (_isFirst(currentStep)) {
-          backLabel = '';
-        } else {
-          backLabel = widget.config.progLabels[currentStep - 1];
-        }
-      } else {
-        backLabel = widget.config.backText ?? 'PREV';
-      }
+      // String backLabel;
+      // if (widget.config.progLabels != null) {
+      //   if (_isFirst(currentStep)) {
+      //     backLabel = '';
+      //   } else {
+      //     backLabel = widget.config.progLabels[currentStep - 1];
+      //   }
+      // } else {
+      //   backLabel = widget.config.backText ?? 'PREV';
+      // }
 
-      return backLabel;
+      return widget.config.backText ?? 'PREV';
     }
 
     final buttons = Container(
