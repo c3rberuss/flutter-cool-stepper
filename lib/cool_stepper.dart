@@ -127,7 +127,7 @@ class _CoolStepperState extends State<CoolStepper> {
         if (_isLast(currentStep)) {
           nextLabel = widget.config.finalText ?? 'FINISH';
         } else {
-          nextLabel = widget.config.progLabels[currentStep + 1];
+          nextLabel = widget.config.progLabels[currentStep];
         }
       } else {
         nextLabel = widget.config.nextText ?? 'NEXT';
