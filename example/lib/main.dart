@@ -44,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
       CoolStep(
         title: "Basic Information",
         subtitle: "Please fill some of the basic information to get started",
+        marginHeader: EdgeInsets.zero,
         content: Form(
           key: _formKey,
           child: Column(
